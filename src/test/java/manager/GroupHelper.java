@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 public class GroupHelper {
     private final ApplicationManager manager;
 
-    public GroupHelper(ApplicationManager manager){
+    public GroupHelper(ApplicationManager manager) {
         this.manager = manager;
     }
 
