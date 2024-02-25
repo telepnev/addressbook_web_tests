@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 public class CreateContactTests extends TestBase {
     @Test
     public void canCreateContactTest() {
-        openContactPage();
-        createContact(new ContactDate
+        app.openContactPage();
+        app.createContact(new ContactDate
                 (
                         "Evgeny",
                         "Telepnev",
@@ -19,8 +19,8 @@ public class CreateContactTests extends TestBase {
 
     @Test
     public void canCreateContactWithEmptyField() {
-        openContactPage();
-        createContact(new ContactDate("", "", "", "", ""));
+        app.openContactPage();
+        app.createContact(new ContactDate("", "", "", "", ""));
     }
 
 }
