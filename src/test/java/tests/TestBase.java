@@ -1,5 +1,7 @@
 package tests;
 
+import model.ContactDate;
+import model.GroupData;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -36,14 +38,14 @@ public class TestBase {
         }
     }
 
-    protected void createGroup(String Group_name, String Group_header, String Group_footer) {
+    protected void createGroup(GroupData group) {
         driver.findElement(By.name("new")).click();
         driver.findElement(By.name("group_name")).click();
-        driver.findElement(By.name("group_name")).sendKeys(Group_name);
+        driver.findElement(By.name("group_name")).sendKeys(group.name());
         driver.findElement(By.name("group_header")).click();
-        driver.findElement(By.name("group_header")).sendKeys(Group_header);
+        driver.findElement(By.name("group_header")).sendKeys(group.header());
         driver.findElement(By.name("group_footer")).click();
-        driver.findElement(By.name("group_footer")).sendKeys(Group_footer);
+        driver.findElement(By.name("group_footer")).sendKeys(group.footer());
         driver.findElement(By.name("submit")).click();
         driver.findElement(By.linkText("group page")).click();
     }
@@ -53,14 +55,42 @@ public class TestBase {
             driver.findElement(By.linkText("groups")).click();
         }
     }
+    protected void openContactPage() {
+        if (!isElementPresent(By.xpath("//h1[contains(text(),'Edit / add address book entry')]"))) {
+            driver.findElement(By.linkText("add new")).click();
+        }
+    }
 
     protected boolean isGroupPresent() {
         return isElementPresent(By.name("selected[]"));
+    }
+    protected boolean isContactPresent() {
+        return isElementPresent(By.xpath("//input[@name='selected[]']"));
     }
 
     protected void removeGroup() {
         driver.findElement(By.name("selected[]")).click();
         driver.findElement(By.name("delete")).click();
         driver.findElement(By.linkText("group page")).click();
+    }
+
+    protected void createContact(ContactDate contactDate) {
+        driver.findElement(By.name("firstname")).click();
+        driver.findElement(By.name("firstname")).sendKeys(contactDate.firstname());
+        driver.findElement(By.name("lastname")).click();
+        driver.findElement(By.name("lastname")).sendKeys(contactDate.lastname());
+        driver.findElement(By.name("address")).click();
+        driver.findElement(By.name("address")).sendKeys(contactDate.address());
+        driver.findElement(By.name("mobile")).click();
+        driver.findElement(By.name("mobile")).sendKeys(contactDate.mobile());
+        driver.findElement(By.name("email")).click();
+        driver.findElement(By.name("email")).sendKeys(contactDate.email());
+        driver.findElement(By.xpath("//input[@type='submit'][2]")).click();
+        driver.findElement(By.linkText("home page")).click();
+    }
+
+    protected void removeContact() {
+        driver.findElement(By.xpath("//input[@name='selected[]']")).click();
+        driver.findElement(By.xpath("//input[@value='Delete']")).click();
     }
 }
