@@ -7,29 +7,24 @@ public class CreateGroupTests extends TestBase {
 
     @Test
     public void canCreateGroup() {
-        app.openGroupsPage();
-        app.createGroup(new GroupData("Group name", "Group header", "Group footer"));
+        app.groups().createGroup(new GroupData("Group name", "Group header", "Group footer"));
     }
 
     @Test
     public void canCreateGroupWithEmptyField() {
-        app.openGroupsPage();
-        app.createGroup(new GroupData());
+        app.groups().createGroup(new GroupData());
     }
 
     @Test
     public void canCreateGroupWithNameOnly() {
-        app.openGroupsPage();
-        app.createGroup(new GroupData().withName("same Name"));
+        app.groups().createGroup(new GroupData().withName("same Name"));
     }
     @Test
     public void canCreateGroupWithHeaderOnly() {
-        app.openGroupsPage();
-        app.createGroup(new GroupData().withHeader("same Header"));
+        app.groups().createGroup(new GroupData().withHeader("same Header"));
     }
     @Test
     public void canCreateGroupWithFooterOnly() {
-        app.openGroupsPage();
-        app.createGroup(new GroupData().withFooter("same Footer"));
+        app.groups().createGroup(new GroupData().withFooter("same Footer"));
     }
 }
