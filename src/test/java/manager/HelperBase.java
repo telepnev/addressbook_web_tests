@@ -18,4 +18,9 @@ public class HelperBase {
         manager.driver.findElement(locator).clear();
         manager.driver.findElement(locator).sendKeys(text);
     }
+
+    // alert окно не появляется, по этому не знаю насколько рабочий метод
+    public void acceptAlert() {
+        manager.driver.switchTo().alert().accept();
+    }
 }
