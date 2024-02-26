@@ -3,10 +3,9 @@ package tests;
 import model.ContactDate;
 import org.junit.jupiter.api.Test;
 
-public class ContactRemovalTests extends TestBase {
-
+public class ContactModificationTests extends TestBase{
     @Test
-    public void canRemoveContact() {
+    public void canModifyContact() {
         if (!app.contacts().isContactPresent()) {
             app.contacts().createContact(new ContactDate(
                     "test_firstname",
@@ -16,6 +15,7 @@ public class ContactRemovalTests extends TestBase {
                     "test_email"
             ));
         }
-        app.contacts().removeContact();
+        app.contacts().modifyContact(new ContactDate().withFirstname("Evgen_modify"));
+
     }
 }
