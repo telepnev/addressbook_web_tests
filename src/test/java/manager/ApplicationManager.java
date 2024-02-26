@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ApplicationManager {
@@ -12,12 +14,19 @@ public class ApplicationManager {
     private GroupHelper groups;
     private ContactHelper contacts;
 
-    public void init() {
+    public void init(String browser) {
         if (driver == null) {
-            driver = new FirefoxDriver();
+            if ("firefox".equals("firefox")) {
+                driver = new FirefoxDriver();
+            } else if ("chrome".equals("chrome")) {
+                driver = new ChromeDriver();
+            } else if ("edge".equals("edge")) {
+                driver = new EdgeDriver();
+            } else {
+                throw new IllegalArgumentException(String.format("Unknown browser : %s", browser ));
+            }
             // веб хук почитать, закрывает драйвер
             Runtime.getRuntime().addShutdownHook(new Thread(driver::quit));
-
             driver.get("http://localhost/addressbook/");
             driver.manage().window().setSize(new Dimension(1550, 830));
             session().login("admin", "secret");
@@ -52,5 +61,4 @@ public class ApplicationManager {
             return false;
         }
     }
-
 }
